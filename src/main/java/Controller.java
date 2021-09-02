@@ -14,9 +14,9 @@ public class Controller {
     }
 
     public void guessInt() {
-        int leftEdge = INITIAL_LEFT_EDGE;
-        int rightEdge = INITIAL_RIGHT_EDGE;
-        final int NUMBER = getRandomInt(INITIAL_LEFT_EDGE, INITIAL_RIGHT_EDGE);
+        int minimum = INITIAL_LEFT_EDGE;
+        int maximum = INITIAL_RIGHT_EDGE;
+        final int NUMBER = getRandomInt(minimum, maximum);
         Scanner sc = new Scanner(System.in);
         ArrayList<Integer> userChoices = new ArrayList<>();
         model.setValue(inputIntValueWithScanner(sc));
@@ -24,12 +24,16 @@ public class Controller {
         while (NUMBER!=currentValue) {
             System.out.println(SystemMessages.PREVIOUS_ATTEMPTS.toString() + gatherUserStatistics(userChoices, currentValue));
             System.out.println(SystemMessages.LAST_ATTEMPT.toString() + lastStats(userChoices));
-            if (currentValue > NUMBER) {
-                rightEdge = currentValue;
-            } else {
-                leftEdge = currentValue;
+            if (currentValue > NUMBER & currentValue < maximum) {
+                model.setMaxValue(currentValue);
+                maximum = model.getMaxValue();
+
+            } else if (currentValue < NUMBER & currentValue > minimum) {
+                model.setMinValue(currentValue);
+                minimum = model.getMinValue();
             }
-            System.out.println(String.format(SystemMessages.SELECTIVE_INT.toString(), leftEdge, rightEdge));
+            System.out.println(String.format(SystemMessages.SELECTIVE_INT.toString(), minimum,
+                    maximum));
             model.setValue(inputIntValueWithScanner(sc));
             currentValue = model.getValue();
         }
