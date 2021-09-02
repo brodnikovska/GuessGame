@@ -1,15 +1,24 @@
 public class Model {
 
-    private int value;
+    private int userGuess;
     private int minValue;
     private int maxValue;
+    private int value;
 
     public int getValue() {
         return value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public void setValue(int currentValue) {
+        this.value = currentValue;
+    }
+
+    public int getUserGuess() {
+        return userGuess;
+    }
+
+    public void setUserGuess(int userGuess) {
+        this.userGuess = userGuess;
     }
 
     public int getMinValue() {

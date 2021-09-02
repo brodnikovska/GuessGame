@@ -16,28 +16,29 @@ public class Controller {
     public void guessInt() {
         int minimum = INITIAL_LEFT_EDGE;
         int maximum = INITIAL_RIGHT_EDGE;
-        final int NUMBER = getRandomInt(minimum, maximum);
+        model.setValue(getRandomInt(minimum, maximum));
+        int secretValue = model.getValue();
         Scanner sc = new Scanner(System.in);
         ArrayList<Integer> userChoices = new ArrayList<>();
-        model.setValue(inputIntValueWithScanner(sc));
-        int currentValue = model.getValue();
-        while (NUMBER!=currentValue) {
+        model.setUserGuess(inputIntValueWithScanner(sc));
+        int currentValue = model.getUserGuess();
+        while (secretValue!=currentValue) {
             System.out.println(SystemMessages.PREVIOUS_ATTEMPTS.toString() + gatherUserStatistics(userChoices, currentValue));
             System.out.println(SystemMessages.LAST_ATTEMPT.toString() + lastStats(userChoices));
-            if (currentValue > NUMBER & currentValue < maximum) {
+            if (currentValue > secretValue & currentValue < maximum) {
                 model.setMaxValue(currentValue);
                 maximum = model.getMaxValue();
 
-            } else if (currentValue < NUMBER & currentValue > minimum) {
+            } else if (currentValue < secretValue & currentValue > minimum) {
                 model.setMinValue(currentValue);
                 minimum = model.getMinValue();
             }
             System.out.println(String.format(SystemMessages.SELECTIVE_INT.toString(), minimum,
                     maximum));
-            model.setValue(inputIntValueWithScanner(sc));
-            currentValue = model.getValue();
+            model.setUserGuess(inputIntValueWithScanner(sc));
+            currentValue = model.getUserGuess();
         }
-        System.out.println(String.format(SystemMessages.WIN_MESSAGE.toString(), NUMBER));
+        System.out.println(String.format(SystemMessages.WIN_MESSAGE.toString(), secretValue));
     }
 
     public int getRandomInt(int min, int max) {
