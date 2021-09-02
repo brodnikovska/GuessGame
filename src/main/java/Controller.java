@@ -37,7 +37,7 @@ public class Controller {
     }
 
     public int getRandomInt(int min, int max) {
-        return min + (int)(Math.random() * ((max - min) + 1));
+        return min + (int)(Math.random() * ((max - min)));
     }
 
     public int inputIntValueWithScanner(Scanner sc) {
