@@ -1,25 +1,12 @@
 public class Model {
 
-    private String firstWord;
-    private String secondWord;
+    private int value;
 
-    public String getFirstWord() {
-        return firstWord;
+    public int getValue() {
+        return value;
     }
 
-    public void setFirstWord(String firstWord) {
-        this.firstWord = firstWord;
-    }
-
-    public String getSecondWord() {
-        return secondWord;
-    }
-
-    public void setSecondWord(String secondWord) {
-        this.secondWord = secondWord;
-    }
-
-    public String greet() {
-        return firstWord + " " + secondWord + "!";
+    public void setValue(int value) {
+        this.value = value;
     }
 }
